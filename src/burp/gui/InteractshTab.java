@@ -56,8 +56,7 @@ import burp.gui.ToastNotification.MessageType;
 import burp.listeners.InteractshListener;
 import interactsh.InteractshEntry;
 import layout.SpringUtilities;
-import lombok.Getter;
-import lombok.Setter;
+
 
 public class InteractshTab extends JComponent {
 	private final MontoyaApi api;
@@ -67,8 +66,11 @@ public class InteractshTab extends JComponent {
 	private JScrollPane scrollPane;
 	private JSplitPane tableSplitPane;
 	private JPanel resultsPanel;
-	@Getter
 	private JTextField pollField;
+	
+	public JTextField getPollField() {
+		return pollField;
+	}
 
 	private Table logTable;
 	private final LogTable logTableModel;
@@ -92,7 +94,7 @@ public class InteractshTab extends JComponent {
 	public InteractshTab(MontoyaApi api) {
 		this.api = api;
 		this.listener = new InteractshListener(
-			newUrl -> ToastNotification.showToast(this, "✓ Interactsh session ready.", MessageType.SUCCESS),
+			newUrl -> ToastNotification.showToast(this, "✓ RequestBin session ready.", MessageType.SUCCESS),
 			errorMsg -> ToastNotification.showToast(this, "❌ " + errorMsg, MessageType.ERROR)
 		);
 
@@ -166,7 +168,7 @@ public class InteractshTab extends JComponent {
 		mainTopPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		JPanel controlsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton generateUrlButton = new JButton("Regenerate Interactsh Session");
+		JButton generateUrlButton = new JButton("Regenerate RequestBin Session");
 		JButton copyUrlButton = new JButton("Copy URL to clipboard");
 		JButton refreshButton = new JButton("Refresh");
 		JButton clearLogButton = new JButton("Clear log");
@@ -431,11 +433,12 @@ public class InteractshTab extends JComponent {
 
 	private void updateUnreadCount() {
 		Container parent = getParent();
-		if (parent instanceof JTabbedPane tabbedPane) {
+		if (parent instanceof JTabbedPane) {
+			JTabbedPane tabbedPane = (JTabbedPane) parent;
 			int tabIndex = tabbedPane.indexOfComponent(this);
 			if (tabIndex != -1) {
 				long unreadCount = log.stream().filter(e -> !e.isRead()).count();
-				String newTitle = "Interactsh";
+				String newTitle = "RequestBin";
 				if (unreadCount > 0) {
 					newTitle += " (" + unreadCount + ")";
 				}
@@ -510,7 +513,7 @@ public class InteractshTab extends JComponent {
 	}
 
 	private class LogTableCellRenderer extends DefaultTableCellRenderer {
-		private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+		private final DateTimeFormatter FORMATTER = DateTimeFormatter
 				.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z").withZone(ZoneId.systemDefault());
 
 		private final Font plainFont;
@@ -552,13 +555,9 @@ public class InteractshTab extends JComponent {
 					String.class, 70, 100), SOURCE_IP("Source IP address", String.class, 120,
 							-1), TIME("Time", Instant.class, 150, -1);
 
-			@Getter
 			private final String name;
-			@Getter
 			private final Class<?> type;
-			@Getter
 			private final int preferredWidth;
-			@Getter
 			private final int maxWidth;
 
 			Column(String name, Class<?> type, int preferredWidth, int maxWidth) {
@@ -566,6 +565,22 @@ public class InteractshTab extends JComponent {
 				this.type = type;
 				this.preferredWidth = preferredWidth;
 				this.maxWidth = maxWidth;
+			}
+			
+			public String getName() {
+				return name;
+			}
+			
+			public Class<?> getType() {
+				return type;
+			}
+			
+			public int getPreferredWidth() {
+				return preferredWidth;
+			}
+			
+			public int getMaxWidth() {
+				return maxWidth;
 			}
 		}
 

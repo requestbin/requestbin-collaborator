@@ -7,6 +7,7 @@ import burp.api.montoya.ui.contextmenu.ContextMenuEvent;
 import burp.api.montoya.ui.contextmenu.ContextMenuItemsProvider;
 import burp.gui.Config;
 import burp.gui.InteractshTab;
+import burp.util.DebugLogger;
 import interactsh.InteractshEntry;
 
 import java.awt.Component;
@@ -23,16 +24,18 @@ public class BurpExtender
 	public void initialize(MontoyaApi api) {
 		BurpExtender.api = api;
 
-		api.extension().setName("Interactsh Collaborator");
+		api.extension().setName("RequestBin Collaborator");
 		api.userInterface().registerContextMenuItemsProvider(this);
 		api.extension().registerUnloadingHandler(this);
-		api.logging().logToOutput("Starting Interactsh Collaborator");
+		
+		// Log startup with debug status
+		DebugLogger.info("Starting RequestBin Collaborator - " + DebugLogger.getDebugStatus());
 
 		burp.gui.Config.generateConfig();
 		BurpExtender.tab = new InteractshTab(api);
 		burp.gui.Config.loadConfig();
 
-		api.userInterface().registerSuiteTab("Interactsh", tab);
+		api.userInterface().registerSuiteTab("RequestBin", tab);
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class BurpExtender
 	@Override
 	public List<Component> provideMenuItems(ContextMenuEvent event) {
 		List<Component> menuList = new ArrayList<Component>();
-		JMenuItem item = new JMenuItem("Copy Interactsh URL");
+		JMenuItem item = new JMenuItem("Copy RequestBin URL");
 		item.addActionListener(e -> BurpExtender.tab.getListener().copyCurrentUrlToClipboard());
 		menuList.add(item);
 

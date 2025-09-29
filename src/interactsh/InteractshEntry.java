@@ -6,8 +6,7 @@ import java.time.Instant;
 
 import burp.api.montoya.http.message.requests.HttpRequest;
 import burp.api.montoya.http.message.responses.HttpResponse;
-import lombok.Getter;
-import lombok.Setter;
+import burp.util.DebugLogger;
 
 // {"protocol":"dns","unique-id":"c4jup534f3acspvifdr0cru63feyyyyyn","full-id":"c4jup534f3acspvifdr0cru63feyyyyyn","q-type":"A","raw-request":";;
 // opcode: QUERY, status: NOERROR, id: 52297\n;; flags: cd; QUERY: 1, ANSWER: 0, AUTHORITY: 0,
@@ -67,21 +66,35 @@ public class InteractshEntry {
 	public String address;
 	public Instant timestamp;
 
-	@Getter
-	@Setter
 	private boolean read = false;
+	
+	public boolean isRead() {
+		return read;
+	}
+	
+	public void setRead(boolean read) {
+		this.read = read;
+	}
 
 	public final HttpRequest httpRequest;
 	public final HttpResponse httpResponse;
 
 	public InteractshEntry(String event) throws JSONException {
+		DebugLogger.debug("Creating InteractshEntry from event: %s", 
+			event.substring(0, Math.min(200, event.length())) + (event.length() > 200 ? "..." : ""));
+		
 		JSONObject jsonObject = new JSONObject(event);
+		DebugLogger.debug("JSON parsed successfully, keys: %s", String.join(", ", jsonObject.keySet()));
+		
 		this.protocol = jsonObject.getString("protocol");
 		this.uid = jsonObject.getString("unique-id");
 		this.address = jsonObject.getString("remote-address");
 		this.timestamp = Instant.parse(jsonObject.getString("timestamp"));
 		this.rawRequest = jsonObject.optString("raw-request", "");
 		this.rawResponse = jsonObject.optString("raw-response", "");
+		
+		DebugLogger.debug("Entry parsed - Protocol: %s, UID: %s, Address: %s, RawReq length: %d, RawResp length: %d", 
+			protocol, uid, address, rawRequest.length(), rawResponse.length());
 		if (this.protocol.equals("http")) {
 			this.httpRequest = HttpRequest.httpRequest(rawRequest);
 			this.httpResponse = HttpResponse.httpResponse(rawResponse);
@@ -93,36 +106,45 @@ public class InteractshEntry {
 	}
 
 	private String processDetails(String protocol, JSONObject obj) throws JSONException {
+		DebugLogger.debug("Processing details for protocol: %s", protocol);
 		String result;
 		switch (protocol) {
 			case "dns":
-				result = "Query Type: " + obj.getString("q-type") + "\n\n";
+				DebugLogger.debug("Processing DNS entry");
+				result = obj.has("q-type") ? "Query Type: " + obj.getString("q-type") + "\n\n" : "";
 				result += "Request: \n" + obj.getString("raw-request") + "\n";
 				result += "Response: \n" + obj.getString("raw-response") + "\n";
 				break;
 			case "ftp":
+				DebugLogger.debug("Processing FTP entry");
 				result = "FTP From: " + obj.getString("remote-address") + "\n\n";
 				result += "Request: \n" + obj.getString("raw-request") + "\n";
 				break;
 			case "http":
+				DebugLogger.debug("Processing HTTP entry");
 				result = "Request: \n" + obj.getString("raw-request") + "\n";
 				result += "Response: \n" + obj.getString("raw-response") + "\n";
 				break;
 			case "ldap":
+				DebugLogger.debug("Processing LDAP entry");
 				result = "LDAP From: " + obj.getString("remote-address") + "\n\n";
 				result += "Request: \n" + obj.getString("raw-request") + "\n";
 				break;
 			case "responder":
 			case "smb":
+				DebugLogger.debug("Processing SMB/Responder entry");
 				result = "Request: \n" + obj.getString("raw-request") + "\n";
 				break;
 			case "smtp":
+				DebugLogger.debug("Processing SMTP entry");
 				result = "SMTP From: " + obj.getString("smtp-from") + "\n\n";
 				result += "Request: \n" + obj.getString("raw-request") + "\n";
 				break;
 			default:
-				result = "UNSUPPORTED PROTOCOL";
+				DebugLogger.debug("Unknown protocol: %s", protocol);
+				result = "UNSUPPORTED PROTOCOL: " + protocol;
 		}
+		DebugLogger.debug("Details processed successfully, length: %d", result.length());
 		return result;
 	}
 

@@ -22,13 +22,12 @@ import com.github.shamil.Xid;
 import burp.api.montoya.http.HttpService;
 import burp.api.montoya.http.message.requests.HttpRequest;
 import burp.api.montoya.http.message.responses.HttpResponse;
-import lombok.Getter;
+import burp.util.DebugLogger;
 
 public class InteractshClient {
 	private PrivateKey privateKey;
 	private PublicKey publicKey;
 
-	@Getter
 	private final String correlationId;
 	private final String secretKey;
 	private final String pubKeyBase64;
@@ -36,9 +35,16 @@ public class InteractshClient {
 	private String host;
 	private int port;
 	private boolean scheme;
-	@Getter
 	private boolean registered;
 	private String authorization;
+	
+	public String getCorrelationId() {
+		return correlationId;
+	}
+	
+	public boolean isRegistered() {
+		return registered;
+	}
 
 	public InteractshClient() {
 		this.correlationId = Xid.get().toString();
@@ -135,26 +141,48 @@ public class InteractshClient {
 		}
 
 		String responseBody = resp.bodyToString();
+		DebugLogger.debug("Received response body length: %d", responseBody.length());
+		DebugLogger.debug("Response body preview: %s", responseBody.substring(0, Math.min(300, responseBody.length())) + (responseBody.length() > 300 ? "..." : ""));
+		
 		try {
 			JSONObject jsonObject = new JSONObject(responseBody);
+			DebugLogger.debug("Response JSON parsed successfully, keys: %s", String.join(", ", jsonObject.keySet()));
+			
 			String aesKey = jsonObject.getString("aes_key");
+			DebugLogger.debug("AES key extracted, length: %d", aesKey.length());
+			
 			String key = this.decryptAesKey(aesKey);
 
 			if (!jsonObject.isNull("data")) {
 				JSONArray data = jsonObject.getJSONArray("data");
+				DebugLogger.debug("Received data array with %d items", data.length());
+				
 				for (int i = 0; i < data.length(); i++) {
-					String decryptedData = decryptData(data.getString(i), key);
+					String encryptedData = data.getString(i);
+					DebugLogger.debug("Processing item %d/%d, encrypted length: %d", i+1, data.length(), encryptedData.length());
+					
+					String decryptedData = decryptData(encryptedData, key);
+					DebugLogger.debug("Decrypted data length: %d", decryptedData.length());
+					DebugLogger.debug("Decrypted data preview: %s", decryptedData.substring(0, Math.min(500, decryptedData.length())) + (decryptedData.length() > 500 ? "..." : ""));
 
 					InteractshEntry entry = new InteractshEntry(decryptedData);
 					burp.BurpExtender.addToTable(entry);
+					DebugLogger.debug("Entry added to table successfully");
 				}
 			}
 		} catch (Exception ex) {
+			DebugLogger.debug("Exception in polling: %s - %s", ex.getClass().getSimpleName(), ex.getMessage());
+			if (DebugLogger.isDebugMode()) {
+				ex.printStackTrace();
+			}
+			
 			if (ex.getMessage() != null && ex.getMessage().contains("UnknownHostException")) {
-				burp.BurpExtender.api.logging().logToError(
-						"Polling failed - the host '" + host + "' could not be resolved.");
+				DebugLogger.error("Polling failed - the host '" + host + "' could not be resolved.");
 			} else {
-				burp.BurpExtender.api.logging().logToError(ex.getMessage());
+				DebugLogger.error("Polling error: " + ex.getMessage());
+				if (ex.getCause() != null) {
+					DebugLogger.error("Caused by: " + ex.getCause().getMessage());
+				}
 			}
 		}
 		return true;
@@ -237,7 +265,10 @@ public class InteractshClient {
 	}
 
 	private String decryptAesKey(String encrypted) throws Exception {
+		DebugLogger.debug("Decrypting AES key - Encrypted length: %d", encrypted.length());
+		
 		byte[] cipherTextArray = Base64.getDecoder().decode(encrypted);
+		DebugLogger.debug("AES key Base64 decoded - CipherText length: %d", cipherTextArray.length);
 
 		Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPPadding");
 		OAEPParameterSpec oaepParams = new OAEPParameterSpec("SHA-256", "MGF1",
@@ -245,13 +276,20 @@ public class InteractshClient {
 		cipher.init(Cipher.DECRYPT_MODE, privateKey, oaepParams);
 		byte[] decrypted = cipher.doFinal(cipherTextArray);
 
-		return new String(decrypted);
+		String result = new String(decrypted);
+		DebugLogger.debug("AES key decryption successful - Key length: %d", result.length());
+		return result;
 	}
 
 	private static String decryptData(String input, String key) throws Exception {
+		DebugLogger.debug("Decrypting data - Input length: %d, Key length: %d", input.length(), key.length());
+		
 		byte[] cipherTextArray = Base64.getDecoder().decode(input);
+		DebugLogger.debug("Base64 decoded - CipherText length: %d", cipherTextArray.length);
+		
 		byte[] iv = Arrays.copyOfRange(cipherTextArray, 0, 16);
 		byte[] cipherText = Arrays.copyOfRange(cipherTextArray, 16, cipherTextArray.length - 1);
+		DebugLogger.debug("IV length: %d, CipherText length: %d", iv.length, cipherText.length);
 
 		IvParameterSpec ivSpec = new IvParameterSpec(iv);
 
@@ -259,8 +297,10 @@ public class InteractshClient {
 		Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");
 		cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivSpec);
 		byte[] decrypted = cipher.doFinal(cipherText);
-
-		return new String(decrypted);
+		
+		String result = new String(decrypted);
+		DebugLogger.debug("Decryption successful - Result length: %d", result.length());
+		return result;
 	}
 
 	private String[] splitStringEveryN(String s, int interval) {
