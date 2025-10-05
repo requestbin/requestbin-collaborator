@@ -68,7 +68,10 @@ public class InteractshClient {
 
 	public boolean register() {
 		burp.BurpExtender.api.logging()
-				.logToOutput("Registering correlation with ID: " + correlationId);
+				.logToOutput("[InteractshClient] Starting registration process with correlation ID: " + correlationId);
+		burp.BurpExtender.api.logging()
+				.logToOutput("[InteractshClient] Registration details - Host: " + host + ", Port: " + port + 
+				           ", Scheme: " + (scheme ? "HTTPS" : "HTTP") + ", HasAuth: " + (authorization != null && !authorization.isEmpty()));
 		try {
 			JSONObject registerData = new JSONObject();
 			registerData.put("public-key", pubKeyBase64);
@@ -76,6 +79,10 @@ public class InteractshClient {
 			registerData.put("correlation-id", correlationId);
 
 			String requestBody = registerData.toString();
+			burp.BurpExtender.api.logging()
+					.logToOutput("[InteractshClient] Registration payload created - Length: " + requestBody.length() + 
+					           ", PubKey length: " + pubKeyBase64.length());
+			
 			StringBuilder requestBuilder = new StringBuilder();
 
 			requestBuilder.append("POST /register HTTP/1.1\r\n").append("Host: ").append(host)
@@ -93,35 +100,55 @@ public class InteractshClient {
 
 			HttpService httpService = HttpService.httpService(host, port, scheme);
 			HttpRequest httpRequest = HttpRequest.httpRequest(httpService, request);
+			
+			burp.BurpExtender.api.logging()
+					.logToOutput("[InteractshClient] Sending registration request to " + host + ":" + port + "...");
+			
+			long startTime = System.currentTimeMillis();
 			HttpResponse resp = burp.BurpExtender.api.http().sendRequest(httpRequest).response();
+			long responseTime = System.currentTimeMillis() - startTime;
+			
+			burp.BurpExtender.api.logging()
+					.logToOutput("[InteractshClient] Registration response received in " + responseTime + "ms - Status: " + resp.statusCode());
 
 			if (resp.statusCode() == 200) {
 				this.registered = true;
-				burp.BurpExtender.api.logging().logToOutput("Session registration was successful.");
+				burp.BurpExtender.api.logging().logToOutput("[InteractshClient] Session registration was successful for correlation: " + correlationId);
+				burp.BurpExtender.api.logging().logToOutput("[InteractshClient] Generated interact domain: " + getInteractDomain());
 				return true;
 			} else {
 				burp.BurpExtender.api.logging().logToError(
-						"Registration was unsuccessful. Status Code: " + resp.statusCode());
+						"[InteractshClient] Registration was unsuccessful for correlation " + correlationId + 
+						" - Status Code: " + resp.statusCode());
+				String responseBody = resp.bodyToString();
 				burp.BurpExtender.api.logging()
-						.logToError("Error message: \n\n" + resp.bodyToString());
+						.logToError("[InteractshClient] Error response body: " + responseBody);
 			}
 		} catch (Exception ex) {
 			if (ex.getMessage() != null && ex.getMessage().contains("UnknownHostException")) {
 				burp.BurpExtender.api.logging().logToError(
-						"Registration failed - the host '" + host + "' could not be resolved.");
+						"[InteractshClient] Registration failed - the host '" + host + "' could not be resolved.");
 			} else {
-				burp.BurpExtender.api.logging().logToError(ex.getMessage());
+				burp.BurpExtender.api.logging().logToError(
+						"[InteractshClient] Registration exception for correlation " + correlationId + ": " + 
+						ex.getClass().getSimpleName() + " - " + ex.getMessage());
 			}
 		}
+		burp.BurpExtender.api.logging().logToError(
+				"[InteractshClient] Registration failed for correlation: " + correlationId);
 		return false;
 	}
 
 	public boolean poll() {
+		DebugLogger.debug("[InteractshClient] Starting poll for correlation: %s", correlationId);
+		
 		StringBuilder requestBuilder = new StringBuilder();
 
 		requestBuilder.append("GET /poll?id=").append(correlationId).append("&secret=")
 				.append(secretKey).append(" HTTP/1.1\r\n").append("Host: ").append(host)
 				.append("\r\n").append("User-Agent: Interact.sh Client\r\n");
+				
+		DebugLogger.debug("[InteractshClient] Poll URL: /poll?id=%s&secret=[REDACTED]", correlationId);
 
 		if (authorization != null && !authorization.isEmpty()) {
 			requestBuilder.append("Authorization: ").append(authorization).append("\r\n");
@@ -190,12 +217,15 @@ public class InteractshClient {
 
 	public void deregister() {
 		burp.BurpExtender.api.logging()
-				.logToOutput("Deregistering correlation with ID: " + correlationId);
+				.logToOutput("[InteractshClient] Starting deregistration process for correlation ID: " + correlationId);
 		try {
 			JSONObject deregisterData = new JSONObject();
 			deregisterData.put("correlation-id", correlationId);
 			deregisterData.put("secret-key", secretKey);
 			String requestBody = deregisterData.toString();
+			
+			burp.BurpExtender.api.logging()
+					.logToOutput("[InteractshClient] Deregistration payload created for correlation: " + correlationId);
 
 			StringBuilder requestBuilder = new StringBuilder();
 
@@ -214,13 +244,23 @@ public class InteractshClient {
 
 			HttpService httpService = HttpService.httpService(host, port, scheme);
 			HttpRequest httpRequest = HttpRequest.httpRequest(httpService, request);
-			burp.BurpExtender.api.http().sendRequest(httpRequest).response();
+			
+			burp.BurpExtender.api.logging()
+					.logToOutput("[InteractshClient] Sending deregistration request for correlation: " + correlationId);
+			
+			HttpResponse deregResponse = burp.BurpExtender.api.http().sendRequest(httpRequest).response();
+			
+			burp.BurpExtender.api.logging()
+					.logToOutput("[InteractshClient] Deregistration completed for correlation " + correlationId + 
+					           " - Status: " + deregResponse.statusCode());
 		} catch (Exception ex) {
 			if (ex.getMessage() != null && ex.getMessage().contains("UnknownHostException")) {
 				burp.BurpExtender.api.logging().logToError(
-						"Deregister failed - the host '" + host + "' could not be resolved.");
+						"[InteractshClient] Deregister failed - the host '" + host + "' could not be resolved for correlation: " + correlationId);
 			} else {
-				burp.BurpExtender.api.logging().logToError(ex.getMessage());
+				burp.BurpExtender.api.logging().logToError(
+						"[InteractshClient] Deregister exception for correlation " + correlationId + ": " + 
+						ex.getClass().getSimpleName() + " - " + ex.getMessage());
 			}
 		}
 	}

@@ -59,6 +59,7 @@ import burp.util.DebugLogger;
 // World\r\n\r\n\r\n--b1_EqDzWEjs9wsJui8L4dcucWKaDQWeApjhHmbfkHMab0--\r\n\r\n","smtp-from":"noreply@anonymousemail.me","remote-address":"167.86.101.24","timestamp":"2021-08-28T19:19:09.654451626Z"}
 public class InteractshEntry {
 	public String protocol;
+	public String fullid; // url id
 	public String uid;
 	public String details;
 	public String rawRequest;
@@ -88,13 +89,14 @@ public class InteractshEntry {
 		
 		this.protocol = jsonObject.getString("protocol");
 		this.uid = jsonObject.getString("unique-id");
+		this.fullid = jsonObject.getString("full-id");
 		this.address = jsonObject.getString("remote-address");
 		this.timestamp = Instant.parse(jsonObject.getString("timestamp"));
 		this.rawRequest = jsonObject.optString("raw-request", "");
 		this.rawResponse = jsonObject.optString("raw-response", "");
 		
-		DebugLogger.debug("Entry parsed - Protocol: %s, UID: %s, Address: %s, RawReq length: %d, RawResp length: %d", 
-			protocol, uid, address, rawRequest.length(), rawResponse.length());
+		DebugLogger.debug("Entry parsed - Protocol: %s, UID: %s, FullID: %s, Address: %s, RawReq length: %d, RawResp length: %d", 
+			protocol, uid, fullid, address, rawRequest.length(), rawResponse.length());
 		if (this.protocol.equals("http")) {
 			this.httpRequest = HttpRequest.httpRequest(rawRequest);
 			this.httpResponse = HttpResponse.httpResponse(rawResponse);
@@ -149,7 +151,7 @@ public class InteractshEntry {
 	}
 
 	public String toString() {
-		return "Protocol: " + protocol + "\n" + "UID: " + uid + "\n" + "Address: " + address + "\n"
+		return "Protocol: " + protocol + "\n" + "UID: " + uid + "\n" + "FullID: " + fullid + "\n" + "Address: " + address + "\n"
 				+ "Timestamp: " + timestamp + "\n";
 	}
 }

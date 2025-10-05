@@ -41,8 +41,8 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Build project with Maven
-        run: mvn clean package -DskipTests -B
+      - name: Build project with Maven (Production)
+        run: mvn clean package -P prod -DskipTests -B
 
       - name: Bump version and push tag
         id: tag_version
@@ -56,7 +56,7 @@ jobs:
       - name: Rename artifact
         id: rename_artifact
         run: |
-          cp ./target/collaborator-*-jar-with-dependencies.jar ./target/interactsh-collaborator.jar
+          cp ./target/collaborator-*-jar-with-dependencies.jar ./target/requestbin-collaborator.jar
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
@@ -64,5 +64,12 @@ jobs:
         with:
             tag: ${{ steps.tag_version.outputs.new_tag  }}
             name: ${{ steps.tag_version.outputs.new_tag }}
-            body: ${{ github.event.inputs.release_notes || steps.tag_version.outputs.changelog || format('Official release of version {0}. The attached JAR file contains the compiled application and all dependencies.', steps.tag_version.outputs.new_version ) }}
-            artifacts: ./target/interactsh-collaborator.jar
+            body: |
+              ${{ github.event.inputs.release_notes || steps.tag_version.outputs.changelog || format('🚀 Official release of RequestBin Collaborator v{0}.
+
+              📦 Installation: Download requestbin-collaborator.jar and load it into Burp Suite Extensions.
+
+              🌐 Enhanced Features: Visit RequestBin.net for advanced cloud-based testing capabilities.
+
+              The attached JAR file contains the complete extension with all dependencies included.', steps.tag_version.outputs.new_version ) }}
+            artifacts: ./target/requestbin-collaborator.jar

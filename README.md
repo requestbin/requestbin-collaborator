@@ -7,47 +7,53 @@
 
 **🚀 Professional Out-of-Band Testing Extension for Burp Suite**
 
-RequestBin Collaborator is a powerful Burp Suite extension designed to enhance your security testing capabilities with advanced OOB (Out-of-Band) interaction monitoring. Built to complement and extend beyond traditional Burp Collaborator functionality, this extension provides seamless integration with RequestBin.net services and self-hosted Interactsh servers.
+RequestBin Collaborator is a powerful Burp Suite extension designed to enhance your security testing capabilities with advanced OOB (Out-of-Band) interaction monitoring. Built to complement [RequestBin.net](https://requestbin.net) services, this extension provides seamless integration with cloud-based request bins and self-hosted Interactsh servers.
 
-![RequestBin Demo](assets/interactsh-demo.gif)
+![RequestBin Demo](assets/requestbin-demo.gif)
 
 ---
 
-## 🌟 What Makes RequestBin Collaborator Different
+## 🌟 Why Choose RequestBin Collaborator?
 
-**RequestBin Collaborator** represents a significant evolution from existing OOB testing tools, developed specifically to serve the growing RequestBin.net community while maintaining full compatibility with the broader security testing ecosystem.
+**RequestBin Collaborator** represents the next evolution in OOB testing tools, specifically designed to serve the growing [RequestBin.net](https://requestbin.net) community while maintaining compatibility with the broader security testing ecosystem.
 
-### **🎯 Built for RequestBin.net Users**
-- **Seamless Integration**: Designed specifically to work with [RequestBin.net](https://requestbin.net) infrastructure
-- **Enhanced Performance**: Optimized polling algorithms for faster interaction detection
-- **Professional UI**: Refined interface matching modern Burp Suite aesthetics
-- **Community Driven**: Actively maintained and enhanced based on user feedback
+### **🎯 Built for Modern Security Testing**
+- **🌐 RequestBin.net Integration**: Seamlessly connect to [RequestBin.net](https://requestbin.net) for enhanced cloud-based testing
+- **⚡ Enhanced Performance**: Optimized polling algorithms and real-time interaction detection
+- **🎨 Professional UI**: Refined interface matching modern Burp Suite aesthetics
+- **🔧 Enterprise Ready**: Designed for professional security teams and consultants
 
-### **🔄 Evolution from Open Source Foundations**
-This project builds upon the excellent foundation laid by the [interactsh-collaborator](https://github.com/wdahlenburg/interactsh-collaborator) project and incorporates community contributions from [@TheArqsz's revised version](https://github.com/TheArqsz/interactsh-collaborator-rev). We deeply respect and acknowledge these contributions while taking the project in a new direction focused on:
+### **🔄 Evolution of Excellence**
+Built upon the solid foundation of the open-source [interactsh-collaborator](https://github.com/wdahlenburg/interactsh-collaborator) project, we've enhanced it with:
 
-- **Professional reliability** for enterprise security teams
-- **Enhanced debugging** and troubleshooting capabilities  
-- **Streamlined workflow** integration with RequestBin.net services
-- **Advanced logging** and interaction analysis features
+- **Professional reliability** for enterprise environments
+- **Advanced debugging** and comprehensive logging
+- **Streamlined workflows** with RequestBin.net services
+- **Modern UI/UX** improvements for better productivity
 
 ---
 
 ## ✨ Key Features
 
-### **🔥 Core Functionality**
-- 🌐 **Dynamic Domain Generation**: Create unique subdomains for comprehensive OOB testing
-- 📊 **Multi-Protocol Support**: Monitor DNS, HTTP, HTTPS, SMTP interactions
-- 🔒 **Secure Communication**: AES/RSA encryption for all server communications  
-- ⚡ **Real-time Monitoring**: Instant notification of incoming interactions
-- 🎛️ **Flexible Configuration**: Support for custom Interactsh servers and RequestBin.net
+### **🔥 Core Capabilities**
+- 🌐 **Multi-Server Support**: Connect to RequestBin.net, OAST Pro, or custom Interactsh servers
+- 📊 **Multi-Protocol Monitoring**: DNS, HTTP, HTTPS, SMTP, LDAP, SMB, FTP interactions
+- 🔒 **Enterprise Security**: AES/RSA encryption for secure server communications
+- ⚡ **Real-Time Updates**: Instant notifications and automatic polling with manual refresh
+- 🎛️ **Flexible Management**: Create, manage, and switch between multiple request bins
 
-### **🚀 Advanced Features** 
-- 🔄 **Smart Polling**: Optimized polling intervals with manual refresh capability
-- 📋 **Rich Data Display**: Built-in HTTP request/response viewer with syntax highlighting
-- 🎯 **Protocol Filtering**: Collaborator-style filtering for different interaction types
-- 📈 **Unread Counter**: Visual indicators for new interactions in tab title
-- 🧹 **Session Management**: Regenerate sessions and clear logs with single clicks
+### **🚀 Advanced Features**
+- 📋 **Rich Data Visualization**: Built-in HTTP request/response viewer with syntax highlighting
+- 🎯 **Smart Filtering**: Protocol-based filtering with unread interaction management
+- 📈 **Professional UI**: Tab-based interface with interaction counters and status indicators
+- 🔄 **Persistent Storage**: Automatic data persistence with cross-session continuity
+- 🧹 **Session Management**: Easy bin creation, deletion, and session regeneration
+
+### **🌟 RequestBin.net Integration**
+- 🚀 **Cloud-Powered**: Leverage RequestBin.net's global infrastructure for testing
+- 📊 **Enhanced Analytics**: Access advanced request analysis on RequestBin.net
+- 🔗 **Seamless Workflow**: Direct links to RequestBin.net for extended functionality
+- 💼 **Professional Features**: Access premium RequestBin.net features directly from Burp Suite
 - 📱 **Toast Notifications**: Non-intrusive alerts for new interactions
 
 ### **🛠 Developer & Enterprise Features**
@@ -80,18 +86,124 @@ mvn clean package -P prod
 docker build --output ./build-output .
 ```
 
-### **📊 Build Modes Explained**
+---
 
-| Build Mode | Debug Logging | File Size | Use Case | Performance |
-|------------|---------------|-----------|----------|-------------|
-| **Development** | ✅ Enabled | ~305KB | Debugging, Testing | Standard |
-| **Production** | ❌ Disabled | ~295KB | Deployment, Release | Optimized |
+## 🚀 Quick Start
 
-**Generated Files:**
-- `collaborator-1.1.jar` - Basic JAR
-- `collaborator-1.1-jar-with-dependencies.jar` - Complete JAR for Burp installation
+### **Installation**
+
+1. **Download** the latest release from [GitHub Releases](https://github.com/requestbin/requestbin-collaborator/releases)
+2. **Open Burp Suite** → Extensions → Installed → Add
+3. **Select** `collaborator-1.1-jar-with-dependencies.jar`
+4. **Navigate** to the "RequestBin Collaborator" tab
+
+### **First Steps**
+
+1. **Create Your First Bin**
+   - Click "Create Your First Bin" or use the "+" tab
+   - Choose between RequestBin.net (recommended) or custom servers
+   - Give your bin a descriptive name
+
+2. **Start Testing**
+   - Copy the generated URL from your bin
+   - Use it in your security testing payloads
+   - Monitor real-time interactions in the extension
+
+3. **Explore Advanced Features**
+   - Visit [RequestBin.net](https://requestbin.net) for enhanced analytics
+   - Use protocol filtering to focus on specific interaction types
+   - Export or share your findings with team members
 
 ---
+
+## 🏢 Enterprise & Professional Use
+
+**RequestBin Collaborator** is designed with professional security teams in mind:
+
+### **🎯 Security Consulting**
+- Generate unique subdomains for each client engagement
+- Professional reporting integration with RequestBin.net
+- Persistent data across testing sessions
+
+### **🏗️ Enterprise Security Teams**
+- Multi-server support for different environments
+- Advanced logging and debugging capabilities
+- Team collaboration through RequestBin.net sharing
+
+### **📚 Security Education**
+- Clear, visual interaction display for training purposes
+- Integration with RequestBin.net's educational resources
+- Professional UI suitable for client demonstrations
+
+---
+
+## 🌐 RequestBin.net Integration
+
+**Experience the full power of modern OOB testing:**
+
+### **🚀 Why RequestBin.net?**
+- **Global Infrastructure**: Servers worldwide for reliable testing
+- **Advanced Analytics**: Request patterns, geolocation, and timing analysis
+- **Team Collaboration**: Share bins and results with your security team
+- **Professional Features**: Custom domains, webhooks, and API access
+
+### **🔗 Seamless Experience**
+- **One-Click Access**: Direct links from the extension to your RequestBin.net dashboard
+- **Synchronized Data**: Automatic synchronization between extension and web platform
+- **Enhanced Reporting**: Generate professional reports with detailed interaction analysis
+
+**[Get started with RequestBin.net →](https://requestbin.net/?utm_source=burp_extension&utm_medium=readme)**
+
+---
+
+## 📖 Documentation
+
+- **[Development Guide](DEVELOPMENT.md)** - Complete development documentation
+- **[GitHub Issues](https://github.com/requestbin/requestbin-collaborator/issues)** - Report bugs and request features
+- **[RequestBin.net Blog](https://blog.requestbin.net/)** - Learn about advanced features
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the security community! Whether you're:
+- 🐛 Reporting bugs
+- 💡 Suggesting new features  
+- 🔧 Submitting code improvements
+- 📚 Improving documentation
+
+Please see our [Development Guide](DEVELOPMENT.md) for technical details.
+
+---
+
+## 📜 License & Acknowledgments
+
+**MIT License** - See [LICENSE](LICENSE) for details.
+
+### **Acknowledgments**
+- Original [interactsh-collaborator](https://github.com/wdahlenburg/interactsh-collaborator) by [@wdahlenburg](https://github.com/wdahlenburg)
+- Community contributions from [@TheArqsz](https://github.com/TheArqsz/interactsh-collaborator-rev)
+- [Interactsh](https://github.com/projectdiscovery/interactsh) by ProjectDiscovery team
+
+---
+
+## 🌟 Connect with RequestBin.net
+
+- **🌐 Website**: [RequestBin.net](https://requestbin.net)
+- **📧 Support**: [Contact RequestBin.net](https://requestbin.net/about)
+- **🐦 Updates**: Follow us for the latest security testing insights
+
+---
+
+<div align="center">
+
+**Made with ❤️ by the RequestBin.net team**
+
+*Empowering security professionals worldwide with advanced OOB testing capabilities*
+
+[**Get Started Today →**](https://requestbin.net/?utm_source=burp_extension&utm_medium=readme_cta)
+
+</div>
 
 ## 📦 Installation & Setup
 

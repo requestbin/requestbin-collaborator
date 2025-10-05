@@ -7,6 +7,7 @@ import burp.api.montoya.ui.contextmenu.ContextMenuEvent;
 import burp.api.montoya.ui.contextmenu.ContextMenuItemsProvider;
 import burp.gui.Config;
 import burp.gui.InteractshTab;
+import burp.services.BinManager;
 import burp.util.DebugLogger;
 import interactsh.InteractshEntry;
 
@@ -19,6 +20,7 @@ public class BurpExtender
 		implements BurpExtension, ContextMenuItemsProvider, ExtensionUnloadingHandler {
 	public static MontoyaApi api;
 	public static InteractshTab tab;
+	public static BinManager binManager;
 
 	@Override
 	public void initialize(MontoyaApi api) {
@@ -29,19 +31,53 @@ public class BurpExtender
 		api.extension().registerUnloadingHandler(this);
 		
 		// Log startup with debug status
-		DebugLogger.info("Starting RequestBin Collaborator - " + DebugLogger.getDebugStatus());
+		DebugLogger.info("[BurpExtender] Starting RequestBin Collaborator - " + DebugLogger.getDebugStatus());
+		api.logging().logToOutput("[BurpExtender] Extension initialization started...");
 
+		api.logging().logToOutput("[BurpExtender] Generating configuration...");
 		burp.gui.Config.generateConfig();
+		
+		api.logging().logToOutput("[BurpExtender] Creating InteractshTab UI component...");
 		BurpExtender.tab = new InteractshTab(api);
+		
+		// Initialize BinManager after UI components with InteractshTab integration
+		api.logging().logToOutput("[BurpExtender] Initializing BinManager and core services...");
+		BurpExtender.binManager = new BinManager(api, BurpExtender.tab);
+		
+		// Set BinManager on tab and load bins
+		api.logging().logToOutput("[BurpExtender] Linking BinManager to UI components...");
+		BurpExtender.tab.setBinManager(binManager);
+		
+		api.logging().logToOutput("[BurpExtender] Loading configuration...");
 		burp.gui.Config.loadConfig();
 
+		// Start polling for any existing bins
+		api.logging().logToOutput("[BurpExtender] Starting polling for existing bins...");
+		binManager.startPollingForAllBins();
+
+		api.logging().logToOutput("[BurpExtender] Registering UI tab...");
 		api.userInterface().registerSuiteTab("RequestBin", tab);
+		
+		api.logging().logToOutput("[BurpExtender] RequestBin Collaborator extension initialization completed successfully!");
 	}
 
 	@Override
 	public void extensionUnloaded() {
-		BurpExtender.tab.cleanup();
-		BurpExtender.api.logging().logToOutput("Thanks for collaborating!");
+		api.logging().logToOutput("[BurpExtender] Extension unload initiated...");
+		
+		if (BurpExtender.binManager != null) {
+			api.logging().logToOutput("[BurpExtender] Shutting down BinManager and services...");
+			BurpExtender.binManager.shutdown();
+			api.logging().logToOutput("[BurpExtender] BinManager shutdown completed");
+		}
+		
+		if (BurpExtender.tab != null) {
+			api.logging().logToOutput("[BurpExtender] Cleaning up InteractshTab...");
+			BurpExtender.tab.cleanup();
+			api.logging().logToOutput("[BurpExtender] InteractshTab cleanup completed");
+		}
+		
+		api.logging().logToOutput("[BurpExtender] Extension unload completed - Thanks for collaborating!");
 	}
 
 	public static int getPollTime() {

@@ -49,11 +49,11 @@ public class Config {
 		String port = InteractshTab.getPortText();
 		String authorization = InteractshTab.getAuthText();
 		String pollInterval = InteractshTab.getPollText();
-		String tls = InteractshTab.getTlsBox();
+		boolean tls = InteractshTab.getTlsBox();
 
 		preferences().setString("interactsh-server", server);
 		preferences().setString("interactsh-port", port);
-		preferences().setString("interactsh-uses-tls", tls);
+		preferences().setBoolean("interactsh-uses-tls", tls);
 		preferences().setString("interactsh-poll-time", pollInterval);
 		preferences().setString("interactsh-authorization", authorization);
 	}
