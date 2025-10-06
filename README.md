@@ -1,48 +1,75 @@
-# RequestBin Collaborator - Free Burp Collaborator Alternative
+# RequestBin Collaborator for Burpsuite
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]() 
+### ⚡ Enhanced OOB Testing Features
+
+### **🚀 Professional Features**
+### **🌟 RequestBin.net Platform Integration**
+- 🚀 **Global Infrastructure**: Access worldwide server network for reliable testing from any location
+- 📊 **Advanced Analytics Dashboard**: Deep request pattern analysis with comprehensive filtering options
+- 🔗 **Seamless Web Integration**: Direct access to extended capabilities through RequestBin.net platform
+- 💼 **Enterprise Features**: Support for custom domains, webhooks, and API integrations
+- 📈 **Historical Analysis**: Long-term vulnerability pattern tracking and trend analysis
+- 🎯 **Enhanced Intelligence**: Geolocation data and advanced request forensics capabilitiesnhancement Features**
+- 📋 **Advanced HTTP Analysis**: Built-in request/response viewer with syntax highlighting and filtering
+- 🎯 **Intelligent Organization**: Smart protocol filtering, unread counters, and powerful search functionality
+- 📈 **Modern Professional Interface**: Tabbed UI with real-time monitoring and status indicators
+- 🔄 **Persistent Data Management**: Maintain comprehensive interaction history across testing sessions
+- 🧹 **Flexible Bin Management**: Create, organize, and manage multiple testing bins per project
+- 📊 **Enhanced Reporting**: Export detailed findings with professional formatting for client deliverables
+- 👥 **Team Collaboration**: Share testing sessions and results across security teams Advanced Capabilities Beyond Standard Testing:**
+
+| Feature | Standard OOB Testing | RequestBin Collaborator Extension |
+|---------|---------------------|----------------------------------|
+| **� Session Management** | Single session only | **✅ Multi-bin organization** |
+| **💾 Data Persistence** | Lost on restart | **✅ Cross-session history** |
+| **📈 Analytics** | Basic interaction logs | **✅ Advanced analytics + RequestBin.net** |
+| **👥 Collaboration** | Individual use | **✅ Team sharing capabilities** |
+| **🌐 Infrastructure** | Limited server options | **✅ Multiple server support** |
+| **🔧 Customization** | Fixed configuration | **✅ Flexible deployment options** |
+| **🎯 User Experience** | Basic interface | **✅ Professional tabbed UI** |sive Out-of-Band Testing:**
+- **SSRF Detection**: Advanced Server-Side Request Forgery testing with detailed analysis
+- **DNS Exfiltration**: Monitor and analyze DNS queries for data extraction attacks  
+- **HTTP Callbacks**: Comprehensive HTTP/HTTPS request and response monitoring
+- **SMTP Testing**: Email-based vulnerability detection with full protocol support
+- **Multi-Protocol Support**: Enhanced testing across LDAP, SMB, FTP and custom protocols
+
+### **💼 Professional Testing Features:**
+- **Multi-Bin Management**: Organize testing sessions across different projects and clients
+- **Persistent Data Storage**: Maintain comprehensive interaction history across sessions
+- **Real-Time Monitoring**: Instant notifications and live interaction tracking
+- **Advanced Analytics**: Deep request analysis with filtering and search capabilities
+- **Professional Reporting**: Export detailed findings for documentation and client reportsd Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]() 
 [![Java](https://img.shields.io/badge/java-17%2B-blue.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 [![Burp Suite](https://img.shields.io/badge/Burp%20Suite-Community%20%2B%20Pro-orange.svg)]()
 [![RequestBin.net](https://img.shields.io/badge/powered%20by-RequestBin.net-blue.svg)](https://requestbin.net)
 
-**🆓 Free Burp Collaborator Alternative for Burp Suite Community & Pro**
+**Advanced Out-of-Band Testing Extension for Burp Suite**
 
-**Unlock Out-of-Band Testing Without Burp Suite Pro License**
+**Enhanced OOB Testing with Multi-Protocol Support & Advanced Analytics**
 
-RequestBin Collaborator is the **free alternative to Burp Collaborator** that works with both Burp Suite Community and Professional editions. No more limitations - get full OOB (Out-of-Band) testing capabilities including SSRF, DNS exfiltration, and blind injection detection without paying for expensive licenses.
+RequestBin Collaborator Extension enhances your Burp Suite experience with advanced out-of-band (OOB) testing capabilities. Perfect for security professionals conducting SSRF testing, DNS exfiltration analysis, and blind injection detection across both Burp Suite Community and Professional editions.
 
-![Burp Collaborator Alternative Demo](assets/requestbin-demo.gif)
+## 🌟 Key Features
 
-> **⚡ Skip Burp Suite Pro costs** - Get enterprise-grade out-of-band testing for free with RequestBin Collaborator
+- 📋 **Multi-Bin Management**: Organize tests with unlimited bins per session
+- 🔄 **Session Persistence**: Maintain testing state across Burp Suite restarts
+- 🌐 **Global Infrastructure**: Access worldwide server network via RequestBin.net
+- 📈 **Rich Analytics**: Detailed request analysis with geolocation data
+- 🔔 **Real-time Notifications**: Instant alerts for new interactions
+- 🚀 **Performance Optimized**: Efficient polling with minimal resource usage
 
----
+![RequestBin Collaborator Demo](assets/requestbin-demo.gif)
 
-## 🚀 Burp Collaborator vs RequestBin Collaborator
-
-### **❌ Burp Collaborator Limitations:**
-- 💰 **Expensive**: Requires Burp Suite Professional ($399/year)
-- 🔒 **Vendor Lock-in**: Limited to PortSwigger's infrastructure
-- 🌐 **No Custom Servers**: Can't use your own domains or servers
-- 📊 **Basic Analytics**: Limited interaction analysis capabilities
-- 👥 **No Team Features**: Difficult to share with security teams
-
-### **✅ RequestBin Collaborator Advantages:**
-- 🆓 **100% Free**: Works with Burp Suite Community Edition
-- 🌍 **Multiple Servers**: RequestBin.net, OAST Pro, custom Interactsh servers
-- 🏗️ **Self-Hosted Option**: Deploy your own servers with full control
-- 📈 **Advanced Analytics**: Rich interaction analysis and filtering
-- 👥 **Team Collaboration**: Share findings easily with your security team
-- 🔧 **Enterprise Features**: Multi-bin management, persistent storage
-- ⚡ **Better Performance**: Optimized real-time polling and notifications
+> **🎯 Professional out-of-band testing made accessible** - Enhanced capabilities with RequestBin Collaborator Extension
 
 ---
 
-## 🎯 Perfect for Burp Suite Community Users
+## 🎯 Enhanced Security Testing Capabilities
 
-**Finally, professional out-of-band testing without the Professional license!**
+**Professional-grade out-of-band testing with advanced features for all Burp Suite users**
 
-### **🔓 Unlock Advanced Testing Capabilities:**
+### **� Comprehensive OOB Testing Support:**
 - **SSRF Detection**: Test for Server-Side Request Forgery vulnerabilities
 - **DNS Exfiltration**: Monitor DNS queries for blind injection attacks  
 - **HTTP Callbacks**: Catch out-of-band HTTP requests and responses
@@ -56,27 +83,25 @@ RequestBin Collaborator is the **free alternative to Burp Collaborator** that wo
 - **Professional UI**: Modern tabbed interface with filtering and search
 - **Export Capabilities**: Generate reports for clients and documentation
 
----
-
-## 🌟 Why Security Professionals Choose RequestBin Collaborator
+## 🌟 Why Security Professionals Choose This Extension
 
 ### **🎯 For Security Consultants:**
-- **Cost-Effective**: Save $399/year on Burp Pro while getting superior OOB testing
-- **Client Separation**: Dedicated bins for each engagement
-- **Professional Reporting**: Integration with [RequestBin.net](https://requestbin.net) for advanced analytics
-- **Custom Domains**: Use your own infrastructure for white-label testing
+- **Enhanced Workflow**: Streamlined testing with dedicated bins for each client engagement
+- **Professional Integration**: Seamless connection with [RequestBin.net](https://requestbin.net) platform for advanced analytics
+- **Flexible Infrastructure**: Support for custom domains and self-hosted testing environments
+- **Comprehensive Documentation**: Detailed interaction logs perfect for client deliverables
 
 ### **🏢 For Enterprise Security Teams:**
-- **Budget-Friendly**: Equip entire team without per-seat licensing costs
-- **Scalable Infrastructure**: Deploy on your own servers for compliance
-- **Team Collaboration**: Share bins and findings across security team members
-- **Advanced Monitoring**: Rich analytics for vulnerability pattern analysis
+- **Scalable Architecture**: Deploy across team environments with consistent performance
+- **Team Collaboration**: Share testing sessions and findings across security team members
+- **Advanced Analytics**: Rich vulnerability pattern analysis and trend monitoring
+- **Compliance Ready**: Self-hosted options for organizations with strict data policies
 
-### **📚 For Security Researchers & Students:**
-- **Free Access**: Learn out-of-band testing techniques without financial barriers
-- **Educational Resources**: Integration with RequestBin.net's learning materials
-- **Open Source**: Study and modify the code for research purposes
-- **Community Support**: Active development and community contributions
+### **📚 For Security Researchers & Education:**
+- **Accessible Learning**: Comprehensive OOB testing capabilities for skill development
+- **Research Integration**: Connect with RequestBin.net's educational resources and community
+- **Open Source Benefits**: Study implementation details and contribute improvements
+- **Active Community**: Ongoing development with security community feedback
 
 ---
 
@@ -95,15 +120,14 @@ RequestBin Collaborator is the **free alternative to Burp Collaborator** that wo
 
 ---
 
-## 🚀 Superior Features for Modern Security Testing
+## 🚀 Advanced Features for Professional Security Testing
 
-### **🔥 Core OOB Testing (Better than Burp Collaborator):**
-- 🆓 **Free Alternative**: Full functionality without Burp Suite Pro license
-- 🌐 **Multiple Servers**: RequestBin.net, OAST Pro, Interactsh, or deploy your own
-- 📊 **All Protocols**: DNS, HTTP/S, SMTP, LDAP, SMB, FTP - comprehensive coverage
-- 🔒 **Enhanced Security**: Military-grade AES/RSA encryption for all communications
-- ⚡ **Faster Performance**: Optimized real-time polling beats Burp Collaborator speed
-- 🎛️ **Multi-Engagement**: Manage multiple client assessments simultaneously
+### **🔥 Enhanced OOB Testing Capabilities:**
+- 🌐 **Multi-Server Support**: Connect to RequestBin.net, Interactsh, or custom-deployed servers
+- 📊 **Complete Protocol Coverage**: Full support for DNS, HTTP/S, SMTP, LDAP, SMB, FTP protocols
+- 🔒 **Enterprise Security**: Military-grade AES/RSA encryption for secure communications
+- ⚡ **Optimized Performance**: Real-time polling with efficient resource management
+- 🎛️ **Multi-Project Management**: Organize and manage multiple testing engagements simultaneously
 
 ### **🚀 Advanced Capabilities Burp Collaborator Can't Match**
 - 📋 **Rich HTTP Analysis**: Built-in request/response viewer with syntax highlighting
@@ -122,13 +146,13 @@ RequestBin Collaborator is the **free alternative to Burp Collaborator** that wo
 - � **Historical Trends**: Long-term vulnerability pattern analysis
 - 🎯 **Threat Intelligence**: Geolocation data and advanced request forensics
 
-### **🛠 Developer & Penetration Tester Features**
-- 🐛 **Advanced Debugging**: Comprehensive logging with conditional compilation
-- 🏗️ **Flexible Deployment**: Development and production build profiles
-- 🔍 **Detailed Tracing**: Step-by-step interaction processing for troubleshooting
-- ⚙️ **Performance Metrics**: Built-in monitoring for optimal testing efficiency
-- 🎯 **Error Recovery**: Graceful handling with detailed diagnostic information
-- 📱 **User Experience**: Toast notifications and professional status indicators
+### **🛠 Developer & Security Professional Features**
+- 🐛 **Comprehensive Debug System**: Advanced logging with conditional compilation for troubleshooting
+- 🏗️ **Flexible Build System**: Separate development and production profiles for different environments
+- 🔍 **Detailed Process Tracking**: Step-by-step interaction processing with full audit trails
+- ⚙️ **Performance Monitoring**: Built-in metrics and monitoring for optimal testing efficiency
+- 🎯 **Robust Error Handling**: Graceful error recovery with detailed diagnostic information
+- 📱 **Professional UX**: Toast notifications, status indicators, and intuitive user interface design
 
 ---
 
@@ -155,49 +179,50 @@ docker build --output ./build-output .
 
 ---
 
-## 🚀 Quick Start - Works with FREE Burp Suite Community!
+## 🚀 Quick Start Guide
 
-### **💸 Save $399/year - Install the Free Burp Collaborator Alternative**
+### **� Easy Installation & Setup**
 
-**✅ Compatible with:**
-- 🆓 **Burp Suite Community Edition** (Free)
-- 💼 **Burp Suite Professional** (Enhanced experience)
-- 🏢 **Burp Suite Enterprise** (Full enterprise features)
+**✅ Compatible with All Burp Suite Editions:**
+- 🆓 **Burp Suite Community Edition** - Full functionality
+- 💼 **Burp Suite Professional** - Enhanced integration
+- 🏢 **Burp Suite Enterprise** - Enterprise features
 
-### **📦 Installation (2 minutes setup)**
+### **📦 Installation Process (2 minutes)**
 
-1. **Download the Free Extension**
+1. **Download the Extension**
    - 📥 Get `requestbin-collaborator.jar` from [GitHub Releases](https://github.com/requestbin/requestbin-collaborator/releases)
-   - 🎯 **399KB download** - Complete with all dependencies included
-   - ⚡ **Instant setup** - No complex configuration required
+   - 🎯 **Small download size (399KB)** - All dependencies included
+   - ⚡ **No additional configuration needed**
 
-2. **Load into Burp Suite (Any Edition)**
-   - 🔧 **Burp Community**: Extensions → Installed → Add (Works perfectly!)
-   - 💼 **Burp Pro/Enterprise**: Same process, enhanced with existing features
-   - 📱 Navigate to "RequestBin Collaborator" tab
+2. **Load into Burp Suite**
+   - 🔧 **Navigate to**: Extensions → Installed → Add
+   - � **Select Extension Type**: Java
+   - 📂 **Choose the JAR file** and click Next
+   - 📱 **Access the "RequestBin" tab** in Burp Suite interface
 
-3. **Start Out-of-Band Testing Immediately**
-   - 🎉 **No Pro License Required** - Full OOB testing in Burp Community
-   - 🚀 **Better than Burp Collaborator** - More features, zero cost
+3. **Start Enhanced OOB Testing**
+   - 🎉 **Immediate access** to advanced out-of-band capabilities
+   - 🚀 **Professional features** available across all Burp Suite editions
 
-### **⚡ First OOB Test (30 seconds to results)**
+### **⚡ Your First Enhanced OOB Test**
 
-1. **Create Your Testing Bin**
-   - 🆕 Click "Create Your First Bin" 
-   - 🌐 Choose **RequestBin.net** (free, global infrastructure)
-   - 📝 Name your bin (e.g., "SSRF-Testing-Target1")
+1. **Create a Testing Bin**
+   - 🆕 Click "Create Your First Bin" in the interface
+   - 🌐 Select **RequestBin.net** for optimal global performance
+   - 📝 Name your testing session (e.g., "SSRF-Testing-Project-Alpha")
 
-2. **Start Vulnerability Testing**
-   - 📋 **Copy the generated URL** from your bin
-   - 🎯 **Paste into payloads** for SSRF, XXE, blind injection testing
-   - ⚡ **Watch real-time interactions** appear instantly
+2. **Execute Advanced Testing**
+   - 📋 **Copy the unique testing URL** from your configured bin
+   - 🎯 **Insert into security payloads** for SSRF, XXE, blind injection, and other OOB tests
+   - ⚡ **Monitor real-time interactions** with live updates and notifications
 
-3. **Advanced Analysis**
-   - 🔍 **Filter by protocol** (HTTP, DNS, SMTP) for focused analysis
-   - 📊 **Visit RequestBin.net** for enhanced analytics and reporting
-   - 👥 **Share findings** with your security team
+3. **Leverage Advanced Analytics**
+   - 🔍 **Apply intelligent filtering** by protocol (HTTP, DNS, SMTP) for focused analysis
+   - 📊 **Access RequestBin.net dashboard** for comprehensive analytics and reporting
+   - 👥 **Share professional findings** with your security team or clients
 
-> **💡 Pro Tip**: RequestBin Collaborator gives you everything Burp Collaborator offers PLUS advanced features, multi-bin management, and persistent storage - all for free!
+> **💡 Pro Tip**: Take advantage of multi-bin management to organize different testing phases and maintain persistent data across Burp Suite sessions!
 
 ---
 
@@ -489,36 +514,34 @@ mvn clean package -P prod   # Build for production
 
 ---
 
-## 🔍 SEO Keywords & Use Cases
+## 🎯 Security Testing Use Cases
 
-**Primary Keywords**: `burp collaborator alternative`, `free burp collaborator`, `burp suite community oob testing`, `out of band testing free`, `burp community edition extensions`
+**Enhanced Out-of-Band Testing Scenarios:**
+- **SSRF Detection**: Advanced Server-Side Request Forgery testing with detailed callback analysis
+- **DNS Exfiltration Analysis**: Comprehensive DNS query monitoring for data extraction detection
+- **Blind SQL Injection**: Out-of-band verification techniques for database injection testing
+- **XXE Vulnerability Testing**: XML External Entity payload validation with multi-protocol support
+- **Server-Side Template Injection**: Detection and analysis via sophisticated callback mechanisms
+- **LDAP Injection Testing**: Multi-protocol monitoring for directory service vulnerabilities
+- **Email Header Injection**: SMTP-based vulnerability verification with detailed logging
 
-**Security Testing Use Cases**:
-- **SSRF Detection** with Burp Suite Community
-- **DNS Exfiltration Testing** without Burp Pro license  
-- **Blind SQL Injection** verification using out-of-band techniques
-- **XXE (XML External Entity)** payload testing and validation
-- **Server-Side Template Injection** detection via callback analysis
-- **LDAP Injection** testing with multi-protocol monitoring
-- **Email Header Injection** verification through SMTP callbacks
+**Target Audience**: Security consultants, penetration testers, bug bounty researchers, enterprise security teams, cybersecurity professionals, and security education programs
 
-**Target Audience**: Security consultants, penetration testers, bug bounty hunters, enterprise security teams, security researchers, students learning ethical hacking
-
-**Competitive Advantages**: Free alternative to expensive Burp Pro, works with Burp Community Edition, multi-server support, persistent storage, team collaboration features, advanced analytics through RequestBin.net integration
+**Key Advantages**: Enhanced OOB testing capabilities, multi-server infrastructure support, persistent session management, team collaboration features, and comprehensive analytics integration with RequestBin.net platform
 
 ---
 
 <div align="center">
 
-## 🎯 Stop Paying for Basic OOB Testing
+## � Enhanced Out-of-Band Testing for Security Professionals
 
-**RequestBin Collaborator = Burp Collaborator Features + Advanced Capabilities - $399/year Cost**
+**Advanced OOB Testing | Multi-Protocol Support | Professional Analytics | Team Collaboration**
 
-### 🆓 Free Forever | 🚀 Better Performance | 🌐 More Servers | 👥 Team Features
+### 🚀 Advanced Features | 🌐 Global Infrastructure | 👥 Team Integration | 📊 Rich Analytics
 
-[**⬇️ Download Free Extension**](https://github.com/requestbin/requestbin-collaborator/releases) | [**🌐 Try RequestBin.net**](https://requestbin.net/?utm_source=github&utm_medium=readme&utm_campaign=burp_alternative)
+[**⬇️ Download Extension**](https://github.com/requestbin/requestbin-collaborator/releases) | [**🌐 Explore RequestBin.net**](https://requestbin.net/?utm_source=github&utm_medium=readme&utm_campaign=burp_extension)
 
-*Trusted by security professionals worldwide - Join thousands using the free Burp Collaborator alternative*
+*Trusted by security professionals worldwide - Experience advanced out-of-band testing capabilities*
 
 </div>
 - **Interactsh Project**: [https://github.com/projectdiscovery/interactsh](https://github.com/projectdiscovery/interactsh)
