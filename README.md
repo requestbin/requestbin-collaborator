@@ -1,8 +1,13 @@
 # RequestBin Collaborator for Burpsuite
 
-### ⚡ Enhanced OOB Testing Features
+[![Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]() 
+[![Java](https://img.shields.io/badge/java-17%2B-blue.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
+[![Burp Suite](https://img.shields.io/badge/Burp%20Suite-Community%20%2B%20Pro-orange.svg)]()
+[![RequestBin.net](https://img.shields.io/badge/powered%20by-RequestBin.net-blue.svg)](https://requestbin.net)
 
-### **🚀 Professional Features**
+![RequestBin Collaborator Demo](assets/requestbin-demo.gif)
+
 ### **🌟 RequestBin.net Platform Integration**
 - 🚀 **Global Infrastructure**: Access worldwide server network for reliable testing from any location
 - 📊 **Advanced Analytics Dashboard**: Deep request pattern analysis with comprehensive filtering options
@@ -20,7 +25,7 @@
 
 | Feature | Standard OOB Testing | RequestBin Collaborator Extension |
 |---------|---------------------|----------------------------------|
-| **� Session Management** | Single session only | **✅ Multi-bin organization** |
+| **💼 Session Management** | Single session only | **✅ Multi-bin organization** |
 | **💾 Data Persistence** | Lost on restart | **✅ Cross-session history** |
 | **📈 Analytics** | Basic interaction logs | **✅ Advanced analytics + RequestBin.net** |
 | **👥 Collaboration** | Individual use | **✅ Team sharing capabilities** |
@@ -38,11 +43,7 @@
 - **Persistent Data Storage**: Maintain comprehensive interaction history across sessions
 - **Real-Time Monitoring**: Instant notifications and live interaction tracking
 - **Advanced Analytics**: Deep request analysis with filtering and search capabilities
-- **Professional Reporting**: Export detailed findings for documentation and client reportsd Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]() 
-[![Java](https://img.shields.io/badge/java-17%2B-blue.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
-[![Burp Suite](https://img.shields.io/badge/Burp%20Suite-Community%20%2B%20Pro-orange.svg)]()
-[![RequestBin.net](https://img.shields.io/badge/powered%20by-RequestBin.net-blue.svg)](https://requestbin.net)
+- **Professional Reporting**: Export detailed findings for documentation and client reports
 
 **Advanced Out-of-Band Testing Extension for Burp Suite**
 
@@ -59,8 +60,6 @@ RequestBin Collaborator Extension enhances your Burp Suite experience with advan
 - 🔔 **Real-time Notifications**: Instant alerts for new interactions
 - 🚀 **Performance Optimized**: Efficient polling with minimal resource usage
 
-![RequestBin Collaborator Demo](assets/requestbin-demo.gif)
-
 > **🎯 Professional out-of-band testing made accessible** - Enhanced capabilities with RequestBin Collaborator Extension
 
 ---
@@ -69,7 +68,7 @@ RequestBin Collaborator Extension enhances your Burp Suite experience with advan
 
 **Professional-grade out-of-band testing with advanced features for all Burp Suite users**
 
-### **� Comprehensive OOB Testing Support:**
+### **💼 Comprehensive OOB Testing Support:**
 - **SSRF Detection**: Test for Server-Side Request Forgery vulnerabilities
 - **DNS Exfiltration**: Monitor DNS queries for blind injection attacks  
 - **HTTP Callbacks**: Catch out-of-band HTTP requests and responses
@@ -109,7 +108,7 @@ RequestBin Collaborator Extension enhances your Burp Suite experience with advan
 
 | Feature | Burp Collaborator | RequestBin Collaborator |
 |---------|-------------------|------------------------|
-| **� Cost** | $399/year (Pro required) | **🆓 100% Free** |
+| **🚀 Compatible** | Burpsuite Pro only | **🆓 Burpsuite Pro and Community** |
 | **🎯 Burp Community Support** | ❌ No | **✅ Full Support** |
 | **🌐 Custom Servers** | ❌ PortSwigger only | **✅ Any Interactsh server** |
 | **📊 Multi-Bin Management** | ❌ Single session | **✅ Unlimited bins** |
@@ -136,14 +135,14 @@ RequestBin Collaborator Extension enhances your Burp Suite experience with advan
 - 🔄 **Never Lose Data**: Persistent storage across Burp sessions (Burp Collaborator resets!)
 - 🧹 **Bin Management**: Create, organize, delete bins - impossible with standard Collaborator
 - 📊 **Professional Reports**: Export findings for client deliverables
-- � **Team Workflows**: Share discoveries with security team members
+- 🚀 **Team Workflows**: Share discoveries with security team members
 
 ### **🌟 RequestBin.net Cloud Platform (Unique Advantage)**
 - 🚀 **Global Infrastructure**: Worldwide server network for reliable testing anywhere
 - 📊 **Deep Analytics**: Advanced request pattern analysis beyond basic Burp logs
 - 🔗 **Web Dashboard**: Access extended capabilities through RequestBin.net platform
 - 💼 **Enterprise Ready**: Custom domains, webhooks, API integrations
-- � **Historical Trends**: Long-term vulnerability pattern analysis
+- 🚀 **Historical Trends**: Long-term vulnerability pattern analysis
 - 🎯 **Threat Intelligence**: Geolocation data and advanced request forensics
 
 ### **🛠 Developer & Security Professional Features**
@@ -181,7 +180,7 @@ docker build --output ./build-output .
 
 ## 🚀 Quick Start Guide
 
-### **� Easy Installation & Setup**
+### **🚀 Easy Installation & Setup**
 
 **✅ Compatible with All Burp Suite Editions:**
 - 🆓 **Burp Suite Community Edition** - Full functionality
@@ -510,7 +509,7 @@ mvn clean package -P prod   # Build for production
 - **RequestBin.net Platform**: [https://requestbin.net](https://requestbin.net) - Enhanced cloud features
 - **Extension Documentation**: [DEVELOPMENT.md](DEVELOPMENT.md) - Technical implementation guide
 - **Community Support**: [GitHub Issues](https://github.com/requestbin/requestbin-collaborator/issues) - Bug reports and feature requests
-- **Professional Services**: [RequestBin.net Contact](https://requestbin.net/contact) - Enterprise support
+- **Professional Services**: [RequestBin.net Contact](https://requestbin.net/about) - Enterprise support
 
 ---
 
