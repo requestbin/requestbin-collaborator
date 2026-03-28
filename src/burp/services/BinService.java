@@ -4,6 +4,7 @@ import burp.api.montoya.MontoyaApi;
 import burp.models.RequestBin;
 import burp.models.BinServer;
 import burp.models.Correlation;
+import burp.util.StorageFileUtils;
 
 import interactsh.InteractshEntry;
 import org.json.JSONArray;
@@ -186,7 +187,7 @@ public class BinService {
                 }
                 // delete persistence file
                 File storageDir = new File(System.getProperty("user.home"), ".requestbin-collaborator");
-                File persistenceFile = new File(storageDir, "interactions-" + toRemove.getUniqueId() + ".json");
+                File persistenceFile = StorageFileUtils.interactionsFile(storageDir, toRemove.getUniqueId());
                 if (persistenceFile.exists()) {
                     persistenceFile.delete();
                 }
@@ -456,7 +457,7 @@ public class BinService {
      */
     private int loadInteractionsForBin(RequestBin bin, java.io.File storageDir) {
         try {
-            java.io.File dataFile = new java.io.File(storageDir, "interactions-" + bin.getCorrelationId() + ".json");
+            java.io.File dataFile = StorageFileUtils.interactionsFile(storageDir, bin.getCorrelationId());
             
             if (!dataFile.exists()) {
                 api.logging().logToOutput("[BinService] No persisted interactions for bin: " + bin.getName());
@@ -530,7 +531,7 @@ public class BinService {
             
             String userHome = System.getProperty("user.home");
             java.io.File storageDir = new java.io.File(userHome, ".requestbin-collaborator");
-            java.io.File dataFile = new java.io.File(storageDir, "interactions-" + bin.getCorrelationId() + ".json");
+            java.io.File dataFile = StorageFileUtils.interactionsFile(storageDir, bin.getCorrelationId());
             
             if (!dataFile.exists()) {
                 return interactions;
