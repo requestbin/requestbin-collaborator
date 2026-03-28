@@ -3,6 +3,7 @@ package burp.services;
 import burp.api.montoya.MontoyaApi;
 import burp.models.BinServer;
 import burp.models.Correlation;
+import burp.util.StorageFileUtils;
 import burp.utils.CryptoUtils;
 import interactsh.InteractshEntry;
 import org.json.JSONArray;
@@ -333,8 +334,8 @@ public class PollingService {
                 api.logging().logToOutput("[PollingService] Created storage directory: " + storageDir.getAbsolutePath() + " (success: " + created + ")");
             }
             
-            // File for this bin unique ID
-            File dataFile = new File(storageDir, "interactions-" + binUniqueId + ".json");
+            // File for this bin unique ID (sanitized to prevent path traversal)
+            File dataFile = StorageFileUtils.interactionsFile(storageDir, binUniqueId);
             
             JSONArray storedInteractions;
             if (dataFile.exists()) {

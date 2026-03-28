@@ -5,6 +5,7 @@ import burp.api.montoya.ui.editor.HttpRequestEditor;
 import burp.api.montoya.ui.editor.HttpResponseEditor;
 import burp.gui.ToastNotification.MessageType;
 import burp.models.RequestBin;
+import burp.util.StorageFileUtils;
 import interactsh.InteractshEntry;
 
 import javax.swing.*;
@@ -630,7 +631,7 @@ public class BinTab extends JPanel {
             
             String userHome = System.getProperty("user.home");
             java.io.File storageDir = new java.io.File(userHome, ".requestbin-collaborator");
-            java.io.File dataFile = new java.io.File(storageDir, "interactions-" + bin.getUniqueId() + ".json");
+            java.io.File dataFile = StorageFileUtils.interactionsFile(storageDir, bin.getUniqueId());
             
             if (!dataFile.exists()) {
                 api.logging().logToOutput("[BinTab] No persisted interactions file for bin: " + bin.getName());
@@ -824,7 +825,7 @@ public class BinTab extends JPanel {
             
             String userHome = System.getProperty("user.home");
             java.io.File storageDir = new java.io.File(userHome, ".requestbin-collaborator");
-            java.io.File dataFile = new java.io.File(storageDir, "interactions-" + bin.getUniqueId() + ".json");
+            java.io.File dataFile = StorageFileUtils.interactionsFile(storageDir, bin.getUniqueId());
             
             if (!dataFile.exists()) {
                 return;
@@ -999,40 +1000,57 @@ public class BinTab extends JPanel {
             // Update empty state (switch to empty view)
             updateEmptyState();
             
-            // Delete persistence file
-            deletePersistenceFile();
-            
-            ToastNotification.showToast(this, "✓ Log cleared and persistence file deleted", MessageType.SUCCESS);
+            // Delete persistence file in background to avoid blocking EDT
+            deletePersistenceFileAsync();
         }
     }
     
     /**
      * Delete the persistence file for this bin
      */
-    private void deletePersistenceFile() {
+    private void deletePersistenceFileAsync() {
+        Thread deletionThread = new Thread(() -> {
+            boolean deleted = deletePersistenceFile();
+            SwingUtilities.invokeLater(() -> {
+                if (deleted) {
+                    ToastNotification.showToast(this, "✓ Log cleared and persistence file deleted", MessageType.SUCCESS);
+                } else {
+                    ToastNotification.showToast(this, "✓ Log cleared (persistence file was unchanged)", MessageType.WARNING);
+                }
+            });
+        }, "requestbin-delete-persistence");
+        deletionThread.setDaemon(true);
+        deletionThread.start();
+    }
+
+    private boolean deletePersistenceFile() {
         try {
             if (bin.getUniqueId() == null || bin.getUniqueId().isEmpty()) {
                 api.logging().logToError("Cannot delete persistence file: bin has no unique ID");
-                return;
+                return false;
             }
             
             // Use same path as updateViewedStatusInStorage method
             String userHome = System.getProperty("user.home");
             File storageDir = new File(userHome, ".requestbin-collaborator");
-            File persistenceFile = new File(storageDir, "interactions-" + bin.getUniqueId() + ".json");
+            File persistenceFile = StorageFileUtils.interactionsFile(storageDir, bin.getUniqueId());
             
             if (persistenceFile.exists()) {
                 boolean deleted = persistenceFile.delete();
                 if (deleted) {
                     api.logging().logToOutput("Deleted persistence file: " + persistenceFile.getAbsolutePath());
+                    return true;
                 } else {
                     api.logging().logToError("Failed to delete persistence file: " + persistenceFile.getAbsolutePath());
+                    return false;
                 }
             } else {
                 api.logging().logToOutput("Persistence file does not exist: " + persistenceFile.getAbsolutePath());
+                return false;
             }
         } catch (Exception e) {
             api.logging().logToError("Error deleting persistence file: " + e.getMessage());
+            return false;
         }
     }
     
